@@ -1,6 +1,8 @@
 # Brand to DESIGN.md Skill
 
-Convert a public brand URL into a practical `DESIGN.md` file for coding agents. The skill can also guide the creation of a single-file HTML demo and browser-based verification screenshots.
+![Brand to DESIGN.md Skill cover](assets/brand-to-design-md-cover.png)
+
+A portable local skill that turns a public brand URL into a source-aware `DESIGN.md`, extracting visual evidence into design tokens, component guidance, usage boundaries, and optional responsive demo verification.
 
 ## What it does
 
