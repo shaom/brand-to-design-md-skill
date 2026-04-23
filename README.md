@@ -21,9 +21,9 @@ This repository intentionally excludes agent-specific metadata so the skill stay
 
 ## Usage
 
-Install or copy the `skills/brand-to-design-md` folder into any agent environment that supports local skills.
+Install or copy the `skills/brand-to-design-md` folder into any agent environment that supports local skills, including Codex, Claude Code, Cursor, and OpenClaw.
 
-For Codex, install directly from GitHub with:
+If your environment supports the `skills` CLI, install directly from GitHub with:
 
 ```bash
 npx skills add https://github.com/shaom/brand-to-design-md-skill --skill brand-to-design-md
