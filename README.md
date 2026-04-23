@@ -23,6 +23,12 @@ This repository intentionally excludes agent-specific metadata so the skill stay
 
 Install or copy the `skills/brand-to-design-md` folder into any agent environment that supports local skills.
 
+For Codex, install directly from GitHub with:
+
+```bash
+npx skills add https://github.com/shaom/brand-to-design-md-skill --skill brand-to-design-md
+```
+
 Example prompt:
 
 ```text
