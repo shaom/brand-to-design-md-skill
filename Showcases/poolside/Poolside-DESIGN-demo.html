@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poolside DESIGN.md Demo</title>
+  <style>
+    @font-face {
+      font-family: "Untitled Sans";
+      src: url("https://poolside.ai/fonts/untitled-sans-regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Untitled Sans";
+      src: url("https://poolside.ai/fonts/untitled-sans-medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("https://poolside.ai/fonts/jetbrains-mono-regular.woff2") format("woff2");
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --background: #fbfaf6;
+      --surface: #ffffff;
+      --surface-muted: #f7f6ef;
+      --surface-subtle: #eeede6;
+      --text: #000000;
+      --secondary: #6f6d69;
+      --tertiary: #93908b;
+      --border: #dad9d2;
+      --border-subtle: #3629001f;
+      --primary: #4137ff;
+      --primary-soft: #d8beff;
+      --primary-pale: #efebfe;
+      --accent-yellow: #feff5e;
+      --accent-orange: #ff8040;
+      --accent-red: #ff2e2e;
+      --accent-green: #67ae00;
+      --code-bg: #f7f6ef;
+      --code-comment: #848484;
+      --code-keyword: #d12a2a;
+      --code-function: #3b31ff;
+      --code-string: #6c0081;
+      --code-type: #038a4b;
+      --code-variable: #286fe8;
+      --font-sans: "Untitled Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", Consolas, monospace;
+      --page-x: 80px;
+      --page-top: 48px;
+      --nav-width: 160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--background);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      background:
+        linear-gradient(90deg, rgba(65, 55, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(65, 55, 255, 0.04) 1px, transparent 1px),
+        var(--background);
+      background-size: 72px 72px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: var(--nav-width) minmax(0, 1fr);
+      gap: 56px;
+      max-width: 1440px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: var(--page-top) var(--page-x) 72px;
+    }
+
+    .nav {
+      position: sticky;
+      top: var(--page-top);
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .mark {
+      width: 18px;
+      height: 18px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .mark::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      transform: translate(-42%, -58%) rotate(28deg);
+    }
+
+    .nav a {
+      width: max-content;
+      padding: 4px 0;
+      color: var(--text);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--primary);
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .mobile-bar {
+      display: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 690px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.76fr);
+      gap: 44px;
+      align-items: end;
+      padding-bottom: 72px;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .kicker,
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .kicker {
+      color: var(--primary);
+      margin-bottom: 28px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: 64px;
+      line-height: 1.05;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    .lead {
+      max-width: 590px;
+      margin-top: 28px;
+      color: var(--secondary);
+      font-size: 22px;
+      line-height: 1.42;
+      letter-spacing: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      border-radius: 0;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--background);
+    }
+
+    .hero-visual {
+      display: grid;
+      gap: 18px;
+    }
+
+    .model-stack {
+      position: relative;
+      min-height: 450px;
+      border: 1px solid var(--text);
+      background: var(--surface-muted);
+      overflow: hidden;
+    }
+
+    .model-stack::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0 49%, rgba(65, 55, 255, 0.18) 49% 50%, transparent 50%),
+        linear-gradient(transparent 0 49%, rgba(65, 55, 255, 0.18) 49% 50%, transparent 50%);
+      background-size: 54px 54px;
+      opacity: 0.65;
+    }
+
+    .trace {
+      position: absolute;
+      inset: 32px;
+      border: 1px solid var(--border);
+      background: rgba(251, 250, 246, 0.78);
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .trace-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .trace-map {
+      position: relative;
+      padding: 26px;
+    }
+
+    .node {
+      position: absolute;
+      width: 118px;
+      min-height: 72px;
+      padding: 12px;
+      border: 1px solid var(--text);
+      background: var(--background);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .node strong {
+      display: block;
+      color: var(--primary);
+      font-family: var(--font-sans);
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .node.one { left: 18px; top: 28px; }
+    .node.two { right: 32px; top: 84px; }
+    .node.three { left: 108px; bottom: 46px; background: var(--primary); color: var(--background); }
+
+    .connector {
+      position: absolute;
+      left: 128px;
+      top: 124px;
+      width: 210px;
+      height: 142px;
+      border-top: 2px solid var(--primary);
+      border-right: 2px solid var(--primary);
+      transform: skewY(-12deg);
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--text);
+      border-top: 0;
+      background: var(--background);
+    }
+
+    .status-row div {
+      padding: 14px;
+      border-right: 1px solid var(--border);
+    }
+
+    .status-row div:last-child {
+      border-right: 0;
+    }
+
+    .status-row span {
+      display: block;
+      color: var(--secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .status-row b {
+      display: block;
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .section {
+      padding: 112px 0;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.32fr) minmax(0, 1fr);
+      gap: 42px;
+      margin-bottom: 52px;
+    }
+
+    .section h2 {
+      max-width: 780px;
+      color: var(--secondary);
+      font-size: 36px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .tile {
+      min-height: 238px;
+      padding: 24px;
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-muted);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tile h3 {
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    .tile p {
+      margin-top: 20px;
+      color: var(--secondary);
+    }
+
+    .tag {
+      width: max-content;
+      padding: 5px 8px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .model-card {
+      border: 1px solid var(--text);
+      background: var(--background);
+    }
+
+    .model-card .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .model-card h3 {
+      font-size: 36px;
+      line-height: 1.08;
+      letter-spacing: 0;
+      font-weight: 400;
+    }
+
+    .model-card .badge {
+      height: max-content;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--accent-yellow);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .specs div {
+      padding: 16px 18px;
+      border-right: 1px solid var(--border);
+    }
+
+    .specs div:last-child {
+      border-right: 0;
+    }
+
+    .specs span {
+      display: block;
+      color: var(--secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .specs b {
+      display: block;
+      margin-top: 7px;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .model-card p {
+      padding: 22px;
+      color: var(--secondary);
+    }
+
+    .code-card {
+      position: sticky;
+      top: 48px;
+      border: 1px solid var(--text);
+      background: var(--code-bg);
+    }
+
+    .code-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    pre {
+      margin: 0;
+      overflow: auto;
+      padding: 22px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .kw { color: var(--code-keyword); }
+    .fn { color: var(--code-function); }
+    .str { color: var(--code-string); }
+    .type { color: var(--code-type); }
+    .var { color: var(--code-variable); }
+    .comment { color: var(--code-comment); }
+
+    .compare {
+      border: 1px solid var(--text);
+      overflow: hidden;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr;
+      min-height: 58px;
+      border-bottom: 1px solid var(--border);
+      background: var(--background);
+    }
+
+    .row:last-child {
+      border-bottom: 0;
+    }
+
+    .row.header {
+      background: var(--surface-subtle);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .row > div {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-right: 1px solid var(--border);
+    }
+
+    .row > div:last-child {
+      border-right: 0;
+    }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      border: 1px solid var(--text);
+    }
+
+    .swatch {
+      min-height: 134px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .swatch:last-child {
+      border-right: 0;
+    }
+
+    .swatch.dark {
+      color: var(--background);
+    }
+
+    .form-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .copy-panel {
+      padding: 32px;
+      border: 1px solid var(--text);
+      background: var(--text);
+      color: var(--background);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .copy-panel h2 {
+      color: var(--background);
+    }
+
+    .copy-panel p {
+      margin-top: 22px;
+      color: var(--border);
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+      padding: 24px;
+      border: 1px solid var(--text);
+      background: var(--surface-muted);
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      background: var(--background);
+      color: var(--text);
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    footer {
+      padding-top: 48px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --page-x: 16px;
+        --page-top: 16px;
+      }
+
+      body {
+        background-size: 48px 48px;
+      }
+
+      .shell {
+        display: block;
+        padding: 0 var(--page-x) 40px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .mobile-bar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 64px;
+        margin: 0 calc(var(--page-x) * -1);
+        padding: 0 var(--page-x);
+        border-bottom: 1px solid var(--border);
+        background: rgba(251, 250, 246, 0.92);
+        backdrop-filter: blur(14px);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        min-height: 0;
+        display: block;
+        padding: 64px 0 48px;
+      }
+
+      h1 {
+        font-size: 44px;
+        line-height: 1.08;
+      }
+
+      .lead {
+        font-size: 18px;
+      }
+
+      .hero-visual {
+        margin-top: 44px;
+      }
+
+      .model-stack {
+        min-height: 410px;
+      }
+
+      .trace {
+        inset: 18px;
+      }
+
+      .node {
+        width: 104px;
+        min-height: 68px;
+      }
+
+      .node.two {
+        right: 14px;
+      }
+
+      .node.three {
+        left: 34px;
+      }
+
+      .connector {
+        left: 94px;
+        width: 128px;
+      }
+
+      .status-row,
+      .specs {
+        grid-template-columns: 1fr;
+      }
+
+      .status-row div,
+      .specs div {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .status-row div:last-child,
+      .specs div:last-child {
+        border-bottom: 0;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section-head,
+      .model-grid,
+      .form-wrap {
+        display: block;
+      }
+
+      .section-head .mono {
+        margin-bottom: 18px;
+      }
+
+      .section h2 {
+        font-size: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tile {
+        min-height: 190px;
+      }
+
+      .model-card + .model-card,
+      .code-card,
+      form {
+        margin-top: 24px;
+      }
+
+      .code-card {
+        position: static;
+      }
+
+      .row {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+
+      .row > div:nth-child(3),
+      .row > div:nth-child(4) {
+        display: none;
+      }
+
+      .palette {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .swatch {
+        border-bottom: 1px solid var(--border);
+      }
+
+      footer {
+        display: block;
+      }
+
+      footer span {
+        display: block;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="mobile-bar">
+      <span class="brand"><span class="mark"></span> Poolside</span>
+      <span>Menu</span>
+    </header>
+
+    <nav class="nav" aria-label="Primary">
+      <a class="brand active" href="#"><span class="mark"></span> Poolside</a>
+      <a href="#models">Models</a>
+      <a href="#platform">Platform</a>
+      <a href="#factory">Factory</a>
+      <a href="#palette">Palette</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <main class="content">
+      <section class="hero" id="top">
+        <div>
+          <p class="kicker">!important / operational intelligence</p>
+          <h1>We build the models. You build the future.</h1>
+          <p class="lead">Foundation models for long-horizon software work, agent execution, and enterprise systems deployed inside your boundary.</p>
+          <div class="actions" aria-label="Hero actions">
+            <a class="button primary" href="#models">→ Start using Laguna</a>
+            <a class="button" href="#factory">→ Inside the model factory</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Agent execution overview">
+          <div class="model-stack">
+            <div class="trace">
+              <div class="trace-head">
+                <span>agent trace</span>
+                <span>policy governed</span>
+              </div>
+              <div class="trace-map">
+                <div class="connector"></div>
+                <div class="node one"><strong>01</strong> plan</div>
+                <div class="node two"><strong>02</strong> run tools</div>
+                <div class="node three"><strong>03</strong> verify</div>
+              </div>
+            </div>
+          </div>
+          <div class="status-row">
+            <div><span>Model</span><b>Laguna M.1</b></div>
+            <div><span>Context</span><b>131k</b></div>
+            <div><span>Boundary</span><b>VPC / on-prem</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="platform">
+        <div class="section-head">
+          <p class="mono">The Poolside platform</p>
+          <h2>Delivering intelligence across the development ecosystem, from IDE to terminal, agents to custom applications.</h2>
+        </div>
+        <div class="grid">
+          <article class="tile">
+            <div>
+              <span class="tag">agents</span>
+              <h3>Agents and multi-agent orchestration</h3>
+            </div>
+            <p>Systems that plan, use tools, execute in sandboxed environments, and leave traces for review.</p>
+          </article>
+          <article class="tile">
+            <div>
+              <span class="tag">surfaces</span>
+              <h3>Developer surfaces</h3>
+            </div>
+            <p>Terminal workflows, IDE extensions, binaries, and custom interfaces that move with engineering teams.</p>
+          </article>
+          <article class="tile">
+            <div>
+              <span class="tag">data</span>
+              <h3>Data and knowledge</h3>
+            </div>
+            <p>Connectors to repositories, databases, data warehouses, and private corpora within strict controls.</p>
+          </article>
+          <article class="tile">
+            <div>
+              <span class="tag">models</span>
+              <h3>Foundation models</h3>
+            </div>
+            <p>Poolside models measured against evaluations created with the environments where they are deployed.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="models">
+        <div class="section-head">
+          <p class="mono">Laguna family</p>
+          <h2>Two foundation models built for agentic coding, long-horizon work, and code execution environments.</h2>
+        </div>
+        <div class="model-grid">
+          <div>
+            <article class="model-card">
+              <div class="top">
+                <h3>Laguna XS.2</h3>
+                <span class="badge">open weight</span>
+              </div>
+              <div class="specs">
+                <div><span>Total</span><b>33B</b></div>
+                <div><span>Active</span><b>3B</b></div>
+                <div><span>License</span><b>Apache 2.0</b></div>
+              </div>
+              <p>Light and fast agentic coding model for rapid iteration, local deployment, and open community evaluation.</p>
+            </article>
+
+            <article class="model-card" style="margin-top:24px">
+              <div class="top">
+                <h3>Laguna M.1</h3>
+                <span class="badge" style="background:var(--primary-soft)">preview</span>
+              </div>
+              <div class="specs">
+                <div><span>Total</span><b>225B</b></div>
+                <div><span>Active</span><b>23B</b></div>
+                <div><span>Training</span><b>30T</b></div>
+              </div>
+              <p>Most capable Poolside model for agentic coding, trained in-house with infrastructure and RL designed around software work.</p>
+            </article>
+          </div>
+
+          <aside class="code-card">
+            <div class="code-head">
+              <span>OpenAI-compatible API</span>
+              <button class="button" type="button" style="min-height:30px;padding:8px 12px">Copy</button>
+            </div>
+            <pre><code><span class="kw">import</span> os
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+client = <span class="fn">OpenAI</span>(
+  api_key=os.getenv(<span class="str">"POOLSIDE_API_KEY"</span>),
+  base_url=<span class="str">"https://inference.poolside.ai/v1"</span>
+)
+
+response = client.chat.completions.create(
+  model=<span class="str">"poolside/laguna-m.1"</span>,
+  messages=[
+    {<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: <span class="str">"Ship the patch."</span>}
+  ]
+)</code></pre>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="factory">
+        <div class="section-head">
+          <p class="mono">Model factory</p>
+          <h2>Benchmarks, experiments, traces, and training decisions should be visible as first-class interface objects.</h2>
+        </div>
+        <div class="compare">
+          <div class="row header">
+            <div>Model</div>
+            <div>Size</div>
+            <div>SWE-bench</div>
+            <div>Terminal</div>
+          </div>
+          <div class="row">
+            <div class="highlight">Laguna XS.2</div>
+            <div>33B-A3B</div>
+            <div>68.2%</div>
+            <div>30.1%</div>
+          </div>
+          <div class="row">
+            <div>Laguna M.1</div>
+            <div>225B-A23B</div>
+            <div>verified</div>
+            <div>agentic</div>
+          </div>
+          <div class="row">
+            <div>Policy trace</div>
+            <div>8GB / 2CPU</div>
+            <div>500 steps</div>
+            <div>auditable</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="palette">
+        <div class="section-head">
+          <p class="mono">Design tokens</p>
+          <h2>Warm neutral canvas, black typography, blue-violet primary actions, and small high-signal accents.</h2>
+        </div>
+        <div class="palette" aria-label="Poolside palette">
+          <div class="swatch" style="background:#fbfaf6"><span>background</span><b>#FBFAF6</b></div>
+          <div class="swatch" style="background:#f7f6ef"><span>surface</span><b>#F7F6EF</b></div>
+          <div class="swatch dark" style="background:#000"><span>text</span><b>#000000</b></div>
+          <div class="swatch dark" style="background:#6f6d69"><span>secondary</span><b>#6F6D69</b></div>
+          <div class="swatch dark" style="background:#4137ff"><span>primary</span><b>#4137FF</b></div>
+          <div class="swatch" style="background:#feff5e"><span>yellow</span><b>#FEFF5E</b></div>
+          <div class="swatch dark" style="background:#ff8040"><span>orange</span><b>#FF8040</b></div>
+          <div class="swatch dark" style="background:#67ae00"><span>green</span><b>#67AE00</b></div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="form-wrap">
+          <div class="copy-panel">
+            <div>
+              <p class="mono" style="color:var(--primary-soft)">inside your boundary</p>
+              <h2>Outcomes, not tokens.</h2>
+              <p>Use this interaction style for enterprise-grade forms, security reviews, model evaluations, and forward-deployed engineering workflows.</p>
+            </div>
+            <p class="mono" style="color:var(--border)">RBAC / audit logs / agent traceability</p>
+          </div>
+          <form>
+            <label>
+              Workstream
+              <input type="text" value="Agentic coding evaluation">
+            </label>
+            <label>
+              Environment
+              <input type="text" value="VPC deployment with repository access">
+            </label>
+            <label>
+              Evaluation goal
+              <textarea>Measure model-assisted patch quality, tool execution reliability, and trace review workflow.</textarea>
+            </label>
+            <button class="button primary" type="button">→ Submit review</button>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <span>Poolside DESIGN.md demo</span>
+        <span>source-aware tokens / flat lab interface / mono actions</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
