@@ -14,3 +14,4 @@ Showcases/
 ## Available
 
 - [poolside](poolside/) — extracted from `https://poolside.ai/`
+- [kigen](kigen/) — extracted from `https://kigen.design/color`

@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kigen DESIGN.md Demo</title>
+  <style>
+    :root {
+      --background: #f7f7f7;
+      --foreground: #161718;
+      --white: #fff;
+      --gray-100: #f2f3f5;
+      --gray-150: #f1f2f4;
+      --gray-200: #e8e8e8;
+      --gray-alpha: #0000001f;
+      --gray-muted: #00000080;
+      --border: #00000014;
+      --blue: #007be5;
+      --blue-light: #e5f4ff;
+      --blue-dark: #034ac1;
+      --pink: #fc07cf;
+      --green: #14ae5c;
+      --teal: #00a2c2;
+      --meadow-50: #beffdf;
+      --meadow-100: #1afdb5;
+      --meadow-200: #16df9f;
+      --meadow-300: #12c48c;
+      --meadow-400: #0eac7a;
+      --meadow-500: #0da273;
+      --meadow-600: #0b966a;
+      --meadow-700: #08875f;
+      --meadow-800: #077754;
+      --meadow-900: #056748;
+      --meadow-1000: #045f42;
+      --meadow-1100: #03573c;
+      --meadow-1200: #034f36;
+      --meadow-1300: #024630;
+      --meadow-1400: #023e2a;
+      --meadow-1500: #013624;
+      --meadow-1600: #012e1e;
+      --meadow-1700: #012518;
+      --meadow-1800: #001e12;
+      --meadow-1900: #00150b;
+      --light-grad: linear-gradient(180deg, #f2f2f2 0%, #e8e8e8 100%);
+      --blue-grad: linear-gradient(90deg, #75daff 5.87%, #588ffc 37.44%, #935afa 102.82%);
+      --orange-grad: linear-gradient(90deg, #ffc062 0%, #ff6456 94.7%);
+      --rainbow: linear-gradient(90deg, #ff4242, #ffa201, #00b330, #0091bd, #4542ff, #8102ff, #ff4242);
+      --shadow-sm: inset .75px .75px 1px #fff, inset -.75px -.75px 1px #00000026, .222px .222px .314px -.5px #0003, .605px .605px .856px -1px #0000002e, 1.329px 1.329px 1.88px -1.5px #00000040, 2.95px 2.95px 4.172px -2px #0000001a, 2.5px 2.5px 3px -2.5px #00000026, -.5px -.5px 0 0 #0000001a;
+      --shadow-lg: inset 1.5px 1.5px 1px 0 #fff, inset -1px -1px 1px 0 #00000026, .444584px .444584px .628737px -1px #00000042, 1.21072px 1.21072px 1.71222px -1.5px #0000003f, 2.5px 2.5px 3.75px -2.5px #0000003b, 6px 6px 8px -3px #0003, 10px 10px 22px -3px #0000000f, -.5px -.5px 0 0 #0000000d;
+      --inset: inset 0 1px 2px #00000026, 0 1px 0 0 #ffffff40;
+      color: var(--foreground);
+      background: var(--background);
+      font-family: Geist, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--background);
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      background:
+        radial-gradient(circle at 50% -120px, rgba(255, 255, 255, .92) 0 210px, transparent 420px),
+        var(--background);
+      color: var(--foreground);
+      letter-spacing: 0;
+    }
+
+    body::before {
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      z-index: 0;
+      width: min(920px, 90vw);
+      height: 230px;
+      content: "";
+      background: var(--rainbow);
+      border-radius: 999px;
+      filter: blur(54px);
+      opacity: .44;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 14px 0 48px;
+    }
+
+    .announcement {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: fit-content;
+      min-height: 36px;
+      margin: 0 auto 14px;
+      padding: 8px 12px;
+      color: var(--white);
+      background: var(--foreground);
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+      font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .announcement span {
+      color: #c9ced4;
+      font-weight: 550;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 48px;
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
+      font-weight: 700;
+    }
+
+    .brand img {
+      display: block;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .context {
+      color: var(--gray-muted);
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      color: var(--foreground);
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+
+    .nav-links .install {
+      color: var(--white);
+      background: var(--foreground);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(620px, 1.48fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 590px;
+      padding: 6px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-bottom: 16px;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      color: var(--gray-muted);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue-grad);
+      box-shadow: 0 0 0 3px rgba(117, 218, 255, .18);
+    }
+
+    h1 {
+      max-width: 480px;
+      margin: 0;
+      font-family: "Inter Display", Geist, Inter, system-ui, sans-serif;
+      font-size: clamp(42px, 6vw, 76px);
+      font-weight: 650;
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 430px;
+      margin: 18px 0 0;
+      color: var(--gray-muted);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 0;
+      border-radius: 10px;
+      box-shadow: var(--shadow-sm);
+      font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 750;
+      cursor: default;
+    }
+
+    .btn.primary {
+      color: var(--white);
+      background: var(--foreground);
+    }
+
+    .btn.gradient {
+      color: var(--white);
+      background: var(--blue-grad);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      min-height: 104px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--light-grad);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--gray-muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .workbench {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 14px;
+      min-height: 590px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--light-grad);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .52);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .controls {
+      padding: 14px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 5px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      color: var(--gray-muted);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .color-input {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .well {
+      min-height: 58px;
+      border-radius: 14px;
+      background: var(--meadow-400);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: var(--inset);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field.small {
+      min-height: 40px;
+      justify-content: space-between;
+      color: var(--gray-muted);
+    }
+
+    .field small,
+    .field span {
+      color: var(--foreground);
+      font-size: inherit;
+      font-weight: 800;
+    }
+
+    .rgb {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .group {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .label {
+      color: var(--gray-muted);
+      font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .slider {
+      height: 46px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: var(--inset);
+    }
+
+    .track {
+      position: relative;
+      height: 8px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--meadow-100), var(--meadow-1900));
+    }
+
+    .thumb {
+      position: absolute;
+      left: 58%;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--white);
+      border-radius: 50%;
+      background: var(--light-grad);
+      box-shadow: var(--shadow-sm);
+      transform: translate(-50%, -50%);
+    }
+
+    .board {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .board-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 14px 0;
+    }
+
+    .board-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--gray-100);
+      font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .tabs span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--gray-muted);
+    }
+
+    .tabs .active {
+      color: var(--foreground);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      padding: 0 14px;
+    }
+
+    .swatch {
+      position: relative;
+      min-height: 74px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .swatch::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      border: 1px solid rgba(0, 0, 0, .12);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .swatch .meta {
+      position: absolute;
+      inset: 9px 8px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .swatch.dark .meta {
+      color: var(--meadow-100);
+    }
+
+    .swatch .meta span:first-child {
+      color: rgba(0, 0, 0, .46);
+    }
+
+    .swatch .meta span:last-child {
+      color: #00150b;
+    }
+
+    .swatch.dark .meta span:first-child,
+    .swatch.dark .meta span:last-child {
+      color: var(--meadow-100);
+    }
+
+    .export {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 184px;
+      gap: 12px;
+      padding: 0 14px 14px;
+    }
+
+    .code {
+      min-height: 154px;
+      padding: 16px;
+      overflow: hidden;
+      border-radius: 16px;
+      background: var(--foreground);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #fff;
+      color: #eaf2eb;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 12px;
+      line-height: 1.68;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .code .comment {
+      color: #8d9691;
+    }
+
+    .code .key {
+      color: #8bff08;
+    }
+
+    .code .value {
+      color: #75daff;
+    }
+
+    .mini {
+      display: grid;
+      gap: 10px;
+    }
+
+    .token-card {
+      min-height: 72px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.68);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .token-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .token-card span {
+      display: block;
+      color: var(--gray-muted);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .below {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .feature {
+      min-height: 154px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--light-grad);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature h3 {
+      margin: 14px 0 8px;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--gray-muted);
+      font-size: 13px;
+      line-height: 1.48;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 5px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .dark-preview {
+      min-height: 70px;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 13px;
+      background: #161718;
+      color: var(--white);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 #fff;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        width: min(100% - 24px, 720px);
+      }
+
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .hero,
+      .workbench {
+        grid-template-columns: 1fr;
+      }
+
+      .intro {
+        min-height: auto;
+      }
+
+      .stats,
+      .below {
+        grid-template-columns: 1fr;
+      }
+
+      .swatches {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .export {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 18px, 430px);
+        padding-top: 10px;
+      }
+
+      .announcement {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+      }
+
+      .brand {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .lead {
+        font-size: 15px;
+      }
+
+      .workbench {
+        padding: 10px;
+        border-radius: 16px;
+      }
+
+      .board-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .tabs {
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      .color-input,
+      .rgb {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="announcement">Introducing Kigen Design System <span>Check it out</span></div>
+
+    <nav class="nav" aria-label="Kigen demo navigation">
+      <div class="brand">
+        <img src="https://kigen.design/kigen-logo-icon.svg" alt="Kigen">
+        <span>Kigen</span>
+        <span class="context">/ color generator</span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Design System</a>
+        <a href="#">Plugin</a>
+        <a href="#">Color</a>
+        <a class="install" href="#">Install</a>
+      </div>
+    </nav>
+
+    <section class="hero" aria-label="Kigen design system demo">
+      <div class="intro">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> TOKEN READY PALETTE</div>
+          <h1>Color systems that feel ready to ship.</h1>
+          <p class="lead">A compact workbench for generating accessible color scales, semantic variables, UI states, and export-ready tokens from one brand color.</p>
+          <div class="actions">
+            <button class="btn primary">Generate palette</button>
+            <button class="btn gradient">Export variables</button>
+          </div>
+        </div>
+
+        <div class="stats" aria-label="Design system metrics">
+          <div class="stat">
+            <strong>20</strong>
+            <span>Generated shades from 50 to 1900</span>
+          </div>
+          <div class="stat">
+            <strong>4.5</strong>
+            <span>Contrast target for readable pairs</span>
+          </div>
+          <div class="stat">
+            <strong>CSS</strong>
+            <span>Tokens prepared for handoff</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbench" aria-label="Color generator interface">
+        <aside class="panel controls">
+          <div class="panel-title">Color input <span class="badge">OKLCH</span></div>
+          <div class="color-input">
+            <div class="well" aria-hidden="true"></div>
+            <div class="field">#0eac7a</div>
+          </div>
+          <div class="rgb">
+            <div class="field small">R <span>14</span></div>
+            <div class="field small">G <span>172</span></div>
+            <div class="field small">B <span>122</span></div>
+          </div>
+
+          <div class="group">
+            <div class="label">Algorithm</div>
+            <div class="field small">Tailwind CSS <span>v4</span></div>
+          </div>
+
+          <div class="group">
+            <div class="label">Contrast shift</div>
+            <div class="slider"><div class="track"><div class="thumb"></div></div></div>
+          </div>
+
+          <div class="group">
+            <div class="label">Naming pattern</div>
+            <div class="field small">50, 100 ... 1900 <span>20</span></div>
+          </div>
+
+          <div class="group">
+            <div class="label">Color name</div>
+            <div class="field">Mountain Meadow</div>
+          </div>
+        </aside>
+
+        <section class="panel board">
+          <div class="board-head">
+            <div>
+              <h2>Mountain Meadow scale</h2>
+              <span class="badge">generated from #0eac7a</span>
+            </div>
+            <div class="tabs" role="tablist" aria-label="Export tabs">
+              <span class="active">CSS</span>
+              <span>Tailwind</span>
+              <span>Tokens</span>
+            </div>
+          </div>
+
+          <div class="swatches">
+            <div class="swatch" style="background:#beffdf"><div class="meta"><span>50</span><span>#BEFFDF</span></div></div>
+            <div class="swatch" style="background:#1afdb5"><div class="meta"><span>100</span><span>#1AFDB5</span></div></div>
+            <div class="swatch" style="background:#16df9f"><div class="meta"><span>200</span><span>#16DF9F</span></div></div>
+            <div class="swatch" style="background:#12c48c"><div class="meta"><span>300</span><span>#12C48C</span></div></div>
+            <div class="swatch" style="background:#0eac7a"><div class="meta"><span>400</span><span>#0EAC7A</span></div></div>
+            <div class="swatch dark" style="background:#0da273"><div class="meta"><span>500</span><span>#0DA273</span></div></div>
+            <div class="swatch dark" style="background:#0b966a"><div class="meta"><span>600</span><span>#0B966A</span></div></div>
+            <div class="swatch dark" style="background:#08875f"><div class="meta"><span>700</span><span>#08875F</span></div></div>
+            <div class="swatch dark" style="background:#077754"><div class="meta"><span>800</span><span>#077754</span></div></div>
+            <div class="swatch dark" style="background:#056748"><div class="meta"><span>900</span><span>#056748</span></div></div>
+            <div class="swatch dark" style="background:#045f42"><div class="meta"><span>1000</span><span>#045F42</span></div></div>
+            <div class="swatch dark" style="background:#03573c"><div class="meta"><span>1100</span><span>#03573C</span></div></div>
+            <div class="swatch dark" style="background:#034f36"><div class="meta"><span>1200</span><span>#034F36</span></div></div>
+            <div class="swatch dark" style="background:#024630"><div class="meta"><span>1300</span><span>#024630</span></div></div>
+            <div class="swatch dark" style="background:#023e2a"><div class="meta"><span>1400</span><span>#023E2A</span></div></div>
+            <div class="swatch dark" style="background:#013624"><div class="meta"><span>1500</span><span>#013624</span></div></div>
+            <div class="swatch dark" style="background:#012e1e"><div class="meta"><span>1600</span><span>#012E1E</span></div></div>
+            <div class="swatch dark" style="background:#012518"><div class="meta"><span>1700</span><span>#012518</span></div></div>
+            <div class="swatch dark" style="background:#001e12"><div class="meta"><span>1800</span><span>#001E12</span></div></div>
+            <div class="swatch dark" style="background:#00150b"><div class="meta"><span>1900</span><span>#00150B</span></div></div>
+          </div>
+
+          <div class="export">
+            <pre class="code"><span class="comment">/* generated variables */</span>
+:root {
+  <span class="key">--meadow-50</span>: <span class="value">#beffdf</span>;
+  <span class="key">--meadow-400</span>: <span class="value">#0eac7a</span>;
+  <span class="key">--meadow-1900</span>: <span class="value">#00150b</span>;
+  <span class="key">--surface-depth</span>: <span class="value">inset + raised</span>;
+}</pre>
+            <div class="mini">
+              <div class="token-card">
+                <strong>Semantic color</strong>
+                <span>success / accent / focus</span>
+              </div>
+              <div class="token-card">
+                <strong>Export format</strong>
+                <span>HEX / RGBA / HSL / OKLCH</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="below" aria-label="Kigen system examples">
+      <article class="feature">
+        <div class="chips">
+          <span class="chip">variables</span>
+          <span class="chip">styles</span>
+          <span class="chip">modes</span>
+        </div>
+        <h3>Design-system starter kit</h3>
+        <p>Variables, components, examples, and documentation sit in one compact product-system language.</p>
+      </article>
+      <article class="feature">
+        <div class="chips">
+          <span class="chip">light</span>
+          <span class="chip">dark</span>
+          <span class="chip">AAA</span>
+        </div>
+        <h3>Theme-aware tokens</h3>
+        <p>Color pairs are presented as practical interface states, with contrast and accessibility kept visible.</p>
+        <div class="dark-preview">surface.dark {<br> color: #fff;<br> background: #161718;<br>}</div>
+      </article>
+      <article class="feature">
+        <div class="chips">
+          <span class="chip">CSS</span>
+          <span class="chip">Tailwind</span>
+          <span class="chip">MCP</span>
+        </div>
+        <h3>Developer handoff</h3>
+        <p>Generated tokens are shaped for code panels, implementation notes, and design-to-development export.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
